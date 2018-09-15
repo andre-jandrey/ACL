@@ -1,0 +1,36 @@
+{
+    "name": "westsoft/acl",
+    "description": "Sistema de permissões para WestSoftware",
+    "version": "1.2",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "West Software",
+            "email": "contato@westsoftware.com.br"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "illuminate/routing": "^5.6.34"
+    },
+    "autoload": {
+        "classmap": [
+            "src/migrations"
+        ],
+        "psr-4": {
+            "Westsoft\\Acl\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Westsoft\\Acl\\ACLServiceProvider"
+            ],
+            "aliases": {
+                "ACL": "Westsoft\\Acl\\ACLServiceProvider"
+            }
+        }
+    }
+}
