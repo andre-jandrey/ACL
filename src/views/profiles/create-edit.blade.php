@@ -22,7 +22,7 @@
     {{ csrf_field() }}
         <div class='form-group'>
             <label>Nome: </label>
-            <input name='name' value="{{ $profile->name or old('name') }}" class='form-control'/>
+            <input name='name' value="{{ $profile->name ?? old('name') }}" class='form-control'/>
         </div>
         @if (isset($profile) )
             <button type="submit" class="btn btn-primary btn-block">Alterar</button>

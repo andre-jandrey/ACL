@@ -20,7 +20,7 @@
         <div class='form-group'>
             <label>Informe o nome da tabela para que todas as permissões sejam geradas automaticamente</label>
             <blockquote class="alert alert-info">Exemplo: "users" (users.index, users.show, users.create, users.store...)</blockquote>
-            <input name='name' value="{{ $permission->name or old('name') }}" class='form-control'/>
+            <input name='name' value="{{ $permission->name ?? old('name') }}" class='form-control'/>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Enviar</button>
     </form>
@@ -40,11 +40,11 @@
         {{ csrf_field() }}
         <div class='form-group'>
             <label>Rota da permissão (Ex: users.show)</label>
-            <input name='name' value="{{ $permission->name or old('name') }}" class='form-control'/>
+            <input name='name' value="{{ $permission->name ?? old('name') }}" class='form-control'/>
         </div>
         <div class='form-group'>
             <label>Descrição: (Ex: Exibir detalhes de um usuários.)</label>
-            <input name='description' value="{{ $permission->description or old('description') }}" class='form-control'/>
+            <input name='description' value="{{ $permission->description ?? old('description') }}" class='form-control'/>
         </div>
         @if (isset($permission))
             <button type="submit" class="btn btn-primary btn-block">Alterar</button>

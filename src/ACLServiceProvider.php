@@ -3,9 +3,6 @@
 namespace Westsoft\Acl;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
-
-use Route;
 
 class ACLServiceProvider extends ServiceProvider
 {
@@ -17,20 +14,20 @@ class ACLServiceProvider extends ServiceProvider
     public function boot(Router $router)
     {
         parent::boot($router);
-        $router->middleware('check.permissions', '\Westsoft\Acl\Middleware\CheckPermissions')
 
+        $router->middleware('check.permissions', '\Westsoft\Acl\Middleware\CheckPermissions');
 
-        $this->loadViewsFrom(__DIR__.'/views', 'acl');
+        $this->loadViewsFrom(__DIR__ . '/views', 'acl');
 
         $this->publishes([
-            __DIR__.'/views' => base_path('resources/views/westsoft/acl'),
+            __DIR__ . '/views' => base_path('resources/views/westsoft/acl'),
         ]);
 
         $this->publishes([
-            __DIR__.'/migrations' => database_path('migrations/'),
+            __DIR__ . '/migrations' => database_path('migrations/'),
         ]);
 
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
 
     }
 

@@ -1,7 +1,7 @@
 {
     "name": "westsoft/acl",
     "description": "Sistema de permissões para WestSoftware",
-    "version": "1.2",
+    "version": "1.3",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -27,10 +27,7 @@
         "laravel": {
             "providers": [
                 "Westsoft\\Acl\\ACLServiceProvider"
-            ],
-            "aliases": {
-                "ACL": "Westsoft\\Acl\\ACLServiceProvider"
-            }
+            ]
         }
     }
 }
