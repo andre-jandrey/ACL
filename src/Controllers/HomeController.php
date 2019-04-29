@@ -28,6 +28,7 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        dd('home');
         /**
          *  Pega o Id do usuário logado no momento,
          *  só chegara neste método se estiver logado protegido
@@ -38,7 +39,7 @@ class HomeController extends Controller
         /**
          *  Busca todos os profiles que estão relacionados com o usuário logado
          */
-        $profiles_user = UserProfiles::where('users_id', '=', $id)->get();
+        $profiles_user = UserProfiles::where('user_id', '=', $id)->get();
 
         $permissions = array();
         /**

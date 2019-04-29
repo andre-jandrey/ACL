@@ -11,25 +11,33 @@ class ACLServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router)
+    public function boot()
     {
-        parent::boot($router);
-
-        $router->middleware('check.permissions', '\Westsoft\Acl\Middleware\CheckPermissions');
-
-        $this->loadViewsFrom(__DIR__ . '/views', 'acl');
+        $this->loadViewsFrom(__DIR__.'/views', 'acl');
 
         $this->publishes([
-            __DIR__ . '/views' => base_path('resources/views/westsoft/acl'),
+            __DIR__.'/views' => base_path('resources/views/westsoft/acl'),
         ]);
 
         $this->publishes([
-            __DIR__ . '/migrations' => database_path('migrations/'),
+            __DIR__.'/migrations' => database_path('migrations/'),
         ]);
 
-        $this->loadRoutesFrom(__DIR__ . '/routes/web.php');
+        /* $this->publishes([
+            __DIR__.'/Listeners' => base_path('app/Listeners/'),
+        ]); */
 
+        $this->publishes([
+            __DIR__.'/Providers' => base_path('app/Providers/'),
+        ]);
+
+        $this->publishes([
+            __DIR__.'/public' => base_path('public/'),
+        ]);
+
+        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
     }
+
 
     /**
      * Register services.
@@ -38,6 +46,6 @@ class ACLServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->register(Providers\LoginEventServiceProvider::class);
     }
 }

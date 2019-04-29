@@ -1,33 +1,64 @@
-@extends('layouts.app')
-@section('content')
+@extends('westsoft.acl.layouts.acl')
 
-<h1> {{isset($profile) ? 'Editar Perfil' : 'Cadastrar Perfil'}} </h1>
+@section('title', 'Criar Perfil')
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
-</div>
-@endif
+@section('css')
 
-@if (isset($profile) )
-    <form method="POST" action="{{ route('profiles.update', ['id'=> $profile->id]) }}">
-    {!! method_field('PUT')!!}
-@else
-    <form action="{{ route('profiles.store') }}" method='POST'>
-@endif
-    {{ csrf_field() }}
-        <div class='form-group'>
-            <label>Nome: </label>
-            <input name='name' value="{{ $profile->name ?? old('name') }}" class='form-control'/>
+@endsection
+
+@section('content-body')
+<!-- Ver todas as equipes -->
+<div class="row justify-content-center">
+    <div class="col-xl-8 col-12">
+        <div class="card px-2">
+            <div class="card-header">
+                {{-- <h4 class="card-title">{{isset($profile) ? 'Editar profile' : 'Nova profile' }}</h4> --}}
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    @if (isset($profile)) 
+                    <form method="post" action="{{route('profiles.update', ['id'=>$profile->id])}}" enctype="multipart/form-data">
+                    {!! method_field('PUT')!!}
+                    @else
+                    <form action="{{ route('profiles.store') }}" method="POST" class="form form-horizontal" enctype="multipart/form-data">
+                    @endif
+                        @csrf
+                        <div class="form-body">
+                            <h4 class="form-section"><i class="icon-notebook"></i> Dados do Perfil</h4>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="cat_anu_nome">Nome</label>
+                                    <input type="text" id="name" class="form-control" placeholder="Exemplo: users.create" name="name" value='{{$profile->name ?? old("name")}}' required>
+                                </div>
+                            </div>
+                           {{--  <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="description">Descrição</label>
+                                    <input type="text" id="descrption" class="form-control" placeholder="Exemplo: Perfil de criar usuários" name="descrption" value='{{$profile->description ?? old("description")}}'>
+                                </div>
+                            </div> --}}
+                        </div>
+                        <div class="form-actions">
+                            <a href="{{ url('/profiles') }}"><button type="button"
+                                    class="btn btn-danger mr-1">
+                                    Cancelar
+                                </button></a>
+                            <button type="submit" class="btn btn-primary">
+                                    {{isset($profile) ? 'Salvar alteração' : 'Salvar' }} 
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        @if (isset($profile) )
-            <button type="submit" class="btn btn-primary btn-block">Alterar</button>
-        @else
-            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
-        @endif
-    </form>
-@stop
+    </div>
+</div>
+<!--/ Fim equipes -->
+
+@endsection
+
+
+@section('js')
+
+@endsection

@@ -7,7 +7,8 @@ class Permission extends Model
 {
 
     protected $fillable = [
-        'name', 'description'
+        'name', 
+        'description'
     ];
 
     public function profiles()

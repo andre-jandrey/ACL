@@ -12,7 +12,7 @@ class Profile extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\User', 'user_profiles');
+        return $this->belongsToMany('App\Models\User', 'user_profiles');
     }
 
     public function permissions()

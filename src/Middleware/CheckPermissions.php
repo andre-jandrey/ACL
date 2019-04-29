@@ -26,8 +26,6 @@ class CheckPermissions
 
         $action = $request->route()->getName(); //nome da rota, açãa
 
-        $profile = $request['profile']; //perfil da pessoa, vai vir pelo JWT
-
         /**
          *  Request->session()->get - Recupera os dados da sessão
          */
@@ -37,12 +35,15 @@ class CheckPermissions
          * Se não existe as permissões, ou a ação requerida (nome da rota) não existe nessa lista
          * de permissões, ele não deixa a pessoa prosseguir e informa "Não autorizado" com código 401.
          */
-        //dd($action);
-        if (!isset($permissions) or !in_array($action, $permissions) ){
-            $data = ['data' => 'Não autorizado.'];
-            $headers = array('Content-Type' => 'application/json;charset=utf8');
-            return response()->json($data, 401, $headers, JSON_UNESCAPED_UNICODE);
 
+        if (!isset($permissions) or !in_array($action, $permissions)) {
+            if ($request->is('api/*')) {
+                $data = ['data' => 'Não autorizado.'];
+                $headers = array('Content-Type' => 'application/json;charset=utf8');
+                return response()->json($data, 401, $headers, JSON_UNESCAPED_UNICODE);
+            }
+            toastr()->error('Não autorizado!');
+            return redirect()->back()->with(['alert-type' => 'error', 'message' => 'Não autorizado']);
         }
 
         /**

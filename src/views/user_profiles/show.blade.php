@@ -3,7 +3,7 @@
 <h1>Detalhes: </h1>
 <ul>
     <li>
-        <b>Usuário: </b>{{$user_profile->users_id}}
+        <b>Usuário: </b>{{$user_profile->user_id}}
     </li>
     <li>
         <b>Perfil:< /b>{{$user_profile->profiles_id}}

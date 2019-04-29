@@ -9,7 +9,8 @@ class ProfilePermissions extends Model
     protected $table = "profile_permissions";
 
     protected $fillable = [
-        'profiles_id', 'permissions_id'
+        'profiles_id', 
+        'permissions_id'
     ];
 
     public function profile() {

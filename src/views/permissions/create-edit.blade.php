@@ -1,56 +1,64 @@
-@extends('layouts.app')
-@section('content')
+@extends('westsoft.acl.layouts.acl')
 
-<h1> {{isset($permission) ? 'Editar Permissão' : 'Cadastrar Permissão'}} </h1>
+@section('title', 'Criar permissão')
 
-@if ($errors->any())
-<div class="alert alert-danger">
-    <ul>
-        @foreach ($errors->all() as $error)
-        <li>{{ $error }}</li>
-        @endforeach
-    </ul>
+@section('css')
+
+@endsection
+
+@section('content-body')
+<!-- Ver todas as equipes -->
+<div class="row justify-content-center">
+    <div class="col-xl-8 col-12">
+        <div class="card px-2">
+            <div class="card-header">
+                {{-- <h4 class="card-title">{{isset($permission) ? 'Editar permission' : 'Nova permission' }}</h4> --}}
+                <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+            </div>
+            <div class="card-content collapse show">
+                <div class="card-body">
+                    @if (isset($permission)) 
+                    <form method="post" action="{{route('permissions.update', ['id'=>$permission->id])}}" enctype="multipart/form-data">
+                    {!! method_field('PUT')!!}
+                    @else
+                    <form action="{{ route('permissions.store') }}" method="POST" class="form form-horizontal" enctype="multipart/form-data">
+                    @endif
+                        @csrf
+                        <div class="form-body">
+                            <h4 class="form-section"><i class="icon-notebook"></i> Dados da permissão</h4>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="cat_anu_nome">Nome</label>
+                                    <input type="text" id="name" class="form-control" placeholder="Exemplo: users.create" name="name" value='{{$permission->name ?? old("name")}}'>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                    <label for="description">Descrição</label>
+                                    <input type="text" id="descrption" class="form-control" placeholder="Exemplo: Permissão de criar usuários" name="description" value='{{$permission->description ?? old("description")}}'>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <a href="{{ url('/permissions') }}"><button type="button"
+                                    class="btn btn-danger mr-1">
+                                    Cancelar
+                                </button></a>
+                            <button type="submit" class="btn btn-primary">
+                                    {{isset($permission) ? 'Salvar alteração' : 'Salvar' }} 
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-@endif
+<!--/ Fim equipes -->
 
-@if (!isset($permission))
-    <h3>Criar permissões no estilo route resource</h3>
-    <form action="{{ route('permissions.store') }}" method='POST'>
-    {{ csrf_field() }}
-        <div class='form-group'>
-            <label>Informe o nome da tabela para que todas as permissões sejam geradas automaticamente</label>
-            <blockquote class="alert alert-info">Exemplo: "users" (users.index, users.show, users.create, users.store...)</blockquote>
-            <input name='name' value="{{ $permission->name ?? old('name') }}" class='form-control'/>
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Enviar</button>
-    </form>
-@endif
+@endsection
 
-<hr>
-<h3 class="text-center">OU</h3>
-<hr>
 
-@if (isset($permission))
-    <form method="POST" action="{{ route('permissions.update', ['id'=> $permission->id]) }}">
-    {!! method_field('PUT')!!}
-@else
-    <h3>Criar as permissoes uma a uma.</h3>
-    <form action="{{route('permissions.store')}}" method='POST'>
-@endif
-        {{ csrf_field() }}
-        <div class='form-group'>
-            <label>Rota da permissão (Ex: users.show)</label>
-            <input name='name' value="{{ $permission->name ?? old('name') }}" class='form-control'/>
-        </div>
-        <div class='form-group'>
-            <label>Descrição: (Ex: Exibir detalhes de um usuários.)</label>
-            <input name='description' value="{{ $permission->description ?? old('description') }}" class='form-control'/>
-        </div>
-        @if (isset($permission))
-            <button type="submit" class="btn btn-primary btn-block">Alterar</button>
-        @else
-            <button type="submit" class="btn btn-primary btn-block">Enviar</button>
-        @endif
-    </form>
+@section('js')
 
-@stop
+@endsection

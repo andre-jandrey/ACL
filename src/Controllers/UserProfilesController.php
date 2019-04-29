@@ -4,10 +4,11 @@ namespace Westsoft\Acl\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 
 use Westsoft\Acl\Models\UserProfiles;
 use Westsoft\Acl\Models\Profile;
+
 
 
 class UserProfilesController extends Controller
@@ -46,7 +47,7 @@ class UserProfilesController extends Controller
         return view('acl::user_profiles.create-edit', compact('user_profiles'));
     }
 
-    public function update(UserProfilesRequest $request, $id){
+    public function update(Request $request, $id){
 
         $user_profiles = UserProfiles::find($id);
         $user_profiles ->update($request->all());
@@ -55,7 +56,7 @@ class UserProfilesController extends Controller
     }
 
 
-    public function store(UserProfilesRequest $request){
+    public function store(Request $request){
 
         $user_profiles = UserProfiles::create($request->all());
 

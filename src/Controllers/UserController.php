@@ -3,7 +3,7 @@ namespace Westsoft\Acl\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 
 class UserController extends Controller
 {

@@ -6,7 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Westsoft\\Permissions\\' => array($baseDir . '/src'),
+    'Westsoft\\Acl\\' => array($baseDir . '/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Symfony\\Contracts\\' => array($vendorDir . '/symfony/contracts'),
@@ -29,5 +29,5 @@ return array(
     'Illuminate\\Contracts\\' => array($vendorDir . '/illuminate/contracts'),
     'Illuminate\\Container\\' => array($vendorDir . '/illuminate/container'),
     'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib/Doctrine/Common/Inflector'),
-    '' => array($vendorDir . '/nesbot/carbon/src'),
+    'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
 );

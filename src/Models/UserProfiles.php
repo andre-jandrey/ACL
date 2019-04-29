@@ -9,7 +9,8 @@ class UserProfiles extends Model
     protected $table = "user_profiles";
 
     protected $fillable = [
-        'profiles_id', 'users_id'
+        'profiles_id', 
+        'user_id'
     ];
 
     public function profile() {
@@ -17,7 +18,7 @@ class UserProfiles extends Model
     }
 
     public function user() {
-        return $this->belongsTo('App\User', 'users_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
 
 }
